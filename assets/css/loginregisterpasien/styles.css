@@ -1,0 +1,20 @@
+body {
+    background-color: #f7f9fc;
+}
+
+.bg-yellow {
+    background-color: #fad24d;
+}
+
+.text-green {
+    color: #42c3cf;
+}
+
+.btn-green {
+    background-color: #42c3cf;
+    color: #ffffff;
+}
+
+.btn-green:hover {
+    background-color: #42c3cf;
+}
