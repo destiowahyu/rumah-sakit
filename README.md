@@ -1,7 +1,7 @@
 # DATABASE
 Buat database dengan nama : `db_rumah_sakit`
 
-lalu import database yang ada di folder db
+lalu import file database yang ada di folder db
 
 # USER ROLE
 ### username dan password sesusai role :
