@@ -1,5 +1,29 @@
-username dan password sesusai role :
+# DATABASE
+Buat database dengan nama : `db_rumah_sakit`
 
-ADMIN
-username : admin
-password : admin
+lalu import database yang ada di folder db
+
+# USER ROLE
+### username dan password sesusai role :
+
+ADMIN :
+
+username : `admin`
+password : `admin`
+
+
+DOKTER :
+
+username : `dokter`
+password : `dokter`
+
+
+PASIEN :
+
+username : `pasien`
+password : `pasien`
+
+# ATURAN LOGIN
+login admin dan dokter di halaman ***login dokter***
+
+login pasien di halaman ***login pasien***
