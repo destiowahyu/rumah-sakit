@@ -11,14 +11,15 @@ include '../includes/db.php';
 $dokterId = $_SESSION['id'];
 $dokterName = $_SESSION['username'];
 
-// Fetch data untuk dashboard
+// Fetch jadwal aktif untuk dashboard
 $jadwalAktif = $conn->query("
     SELECT hari, jam_mulai, jam_selesai 
     FROM jadwal_periksa 
-    WHERE id_dokter = '$dokterId'
+    WHERE id_dokter = '$dokterId' AND status = 'aktif'
     LIMIT 1
 ")->fetch_assoc();
 
+// Fetch jumlah pasien yang akan diperiksa
 $pasienCount = $conn->query("
     SELECT COUNT(*) AS total 
     FROM daftar_poli 
@@ -27,6 +28,7 @@ $pasienCount = $conn->query("
     )
 ")->fetch_assoc()['total'];
 
+// Fetch jumlah riwayat pemeriksaan
 $riwayatCount = $conn->query("
     SELECT COUNT(*) AS total 
     FROM periksa 
@@ -80,7 +82,7 @@ $riwayatCount = $conn->query("
                         <i class="fas fa-calendar-check"></i>
                         <h5>Jadwal Aktif</h5>
                         <p>
-                            <?= $jadwalAktif ? $jadwalAktif['hari'] . " (" . $jadwalAktif['jam_mulai'] . " - " . $jadwalAktif['jam_selesai'] . ")" : "Tidak Ada" ?>
+                            <?= $jadwalAktif ? $jadwalAktif['hari'] . " (" . $jadwalAktif['jam_mulai'] . " - " . $jadwalAktif['jam_selesai'] . ")" : "Tidak ada jadwal aktif" ?>
                         </p>
                     </div>
                 </div>

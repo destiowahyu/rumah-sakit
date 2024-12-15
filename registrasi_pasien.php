@@ -10,9 +10,10 @@ function generateNoRM($conn) {
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
-    $newNumber = str_pad($row['total'] + 1, 3, "0", STR_PAD_LEFT);
+    $newNumber = $row['total'] + 1; // Hapus str_pad, langsung gunakan angka
     return $yearMonth . '-' . $newNumber;
 }
+
 
 $success = false;
 $error = null;

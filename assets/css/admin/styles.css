@@ -2,7 +2,7 @@
 :root {
     --main-bg-color: #f9fafa;
     --sidebar-bg-color: #ffffff;
-    --text-color: #2ac4c2;
+    --text-color: #104342;
     --card-bg-color: #ffffff;
     --card-shadow: rgba(0, 0, 0, 0.1);
 }
@@ -164,7 +164,7 @@ body {
 }
 
 .sidebar h3 {
-    color: var(--text-color);
+    color: #42c3cf; 
     margin-bottom: 10px;
 }
 
@@ -185,6 +185,7 @@ body {
     font-size: 1rem;
     color: var(--text-color);
     font-weight: bold;
+    color: #42c3cf; 
 }
 
 .sidebar a {

@@ -85,7 +85,7 @@ $adminName = $_SESSION['username'];
     <div class="sidebar" id="sidebar">
         <h3>Admin Panel</h3>
         <div class="profile">
-        <img src="../assets/images/man.png" alt="Avatar">
+        <img src="../assets/images/admin.png" alt="Avatar">
             <span><?= htmlspecialchars($adminName) ?></span>
         </div>
         <a href="dashboard.php"><i class="fas fa-chart-pie"></i> Dashboard</a>

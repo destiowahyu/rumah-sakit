@@ -7,15 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = md5($_POST['password']);
 
     // Query untuk memeriksa username dan password
-    $query = "SELECT * FROM pasien WHERE username = ? AND password = ?";
+    $query = "SELECT id, username FROM pasien WHERE username = ? AND password = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("ss", $username, $password);
     $stmt->execute();
     $result = $stmt->get_result();
 
     if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
         $_SESSION['role'] = 'pasien';
-        $_SESSION['username'] = $username;
+        $_SESSION['username'] = $row['username'];
+        $_SESSION['id'] = $row['id']; // Menyimpan ID pasien ke session
         header("Location: pasien/dashboard.php");
         exit;
     } else {
@@ -68,4 +70,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </body>
 </html>
-
