@@ -1,0 +1,507 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+}
+.card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
+    border: none;
+    text-align: center;
+    background: linear-gradient(to bottom,rgba(209, 236, 242, 0.67), #fff);
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.card:hover {
+    transform: scale(1.15);
+    background: linear-gradient(to bottom,rgb(190, 243, 255), #ecfcff);
+    border-radius: 15px;
+}
+.card i {
+    font-size: 1.5rem;
+    color: #00b9b9;
+    padding-bottom: 10px;
+}
+.card h5 {
+    color: black;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.card p {
+    font-size: 1.0rem;
+    font-weight: bold;
+    color: #42c3cf;
+}
+
+.card-pasien p {
+    display: grid;
+    grid-template-columns: 130px auto; /* Kolom untuk label dan nilai */
+    gap: 10px; /* Jarak antar kolom */
+    margin: 5px 0; /* Jarak antar paragraf */
+}
+
+.card-pasien p strong {
+    font-weight: bold;
+    color: black;
+}
+
+.card-pasien h5 {
+    font-weight: bold;
+    color: #42c3cf;
+    margin-bottom: 15px; /* Beri jarak bawah judul */
+}
+
+.card-pasien {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
+    border: none;
+    background: linear-gradient(to bottom, rgba(209, 236, 242, 0.67), #fff);
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 20px;
+    padding: 20px;
+    min-height: 250px; /* Pastikan semua kartu memiliki tinggi minimum yang sama */
+}
+
+
+.card-pasien-pemeriksaan h5 {
+    font-weight: bold;
+    color: #42c3cf;
+    margin-bottom: 15px; /* Beri jarak bawah judul */
+}
+
+.card-pasien-pemeriksaan {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
+    border: none;
+    background: linear-gradient(to bottom, rgba(209, 236, 242, 0.67), #fff);
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 20px;
+    padding: 20px;
+    min-height: 250px; /* Pastikan semua kartu memiliki tinggi minimum yang sama */
+}
+
+
+.card-daftar-poli {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s ease-in-out;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.card-profildokter {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
+    border: none;
+    background-color: #ffffff;
+    border-radius: 15px;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+.sidebar {
+    height: 100vh;
+    width: 250px;
+    background-color: #ffffff;
+    color: #104342;
+    position: fixed;
+    padding-top: 35px;
+    transition: all 0.3s ease-in-out;
+    overflow-y: auto;
+    z-index: 1000;
+}
+.sidebar a {
+    color: #104342;
+    text-decoration: none;
+    padding: 12px 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 20px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+}
+.sidebar a:hover {
+    background-color: #dcfaff;
+    color: #2a4e4e; 
+    border-radius: 25px;
+    
+}
+.sidebar a.active{
+
+    background-color: #42c3cf;
+    border-radius: 25px;
+    color: #e0f7f7;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+h1 {
+    color: #42c3cf;
+}
+
+.btn-primary {
+    background-color: #42c3cf;
+    border-color: #42c3cf;
+}
+
+.btn-primary:hover {
+    background-color: #35b5bf;
+    border-color: #35b5bf;
+}
+
+.btn-warning {
+    background-color: #ffdd57;
+    border-color: #ffdd57;
+}
+
+.btn-warning:hover {
+    background-color: #fcd34d;
+    border-color: #fcd34d;
+}
+
+.btn-danger {
+    background-color: #f87171;
+    border-color: #f87171;
+}
+
+.btn-danger:hover {
+    background-color: #ef4444;
+    border-color: #ef4444;
+}
+
+.tombol-aksi {
+    display: flex;
+    gap: 5px; 
+    align-items: center;
+}
+
+table thead {
+    background-color: #42c3cf;
+    color: #fff;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9fafa;
+}
+
+.modal-header {
+    background-color: #42c3cf;
+    color: #fff;
+}
+
+
+.sidebar.collapsed {
+    width: 60px;
+    padding-top: 50px;
+}
+.sidebar.collapsed a.active {
+    color: #42c3cf;
+    background-color:rgba(255, 255, 255, 0);
+}
+.sidebar.collapsed a:hover{
+    color: #42c3cf;
+    background-color:rgba(66, 195, 207, 0);
+}
+.sidebar.collapsed a {
+    padding: 12px 10px; 
+    justify-content: center;
+}
+.sidebar.collapsed a span {
+    display: none;
+}
+.sidebar.collapsed .avatar-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+.sidebar.collapsed .admin-avatar {
+    width: 40px;
+    height: 40px;
+}
+.sidebar.collapsed #admin-name {
+    display: none;
+}
+.sidebar.collapsed #admin-panel {
+    display: none;
+}
+
+.admin-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.avatar-container {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-top: 10px;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 35px;
+    transition: all 0.3s ease-in-out;
+}
+.content.collapsed {
+    margin-left: 70px;
+}
+
+/* Overlay for Mobile */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+.overlay.show {
+    display: block;
+}
+
+
+.toggle-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: rgba(255, 255, 255, 0);
+    color: #42c3cf;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 1.3rem;
+    z-index: 1100;
+    border-radius: 5px;
+}
+
+
+.table-pasien {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+}
+
+th {
+    background-color: #42c3cf;
+    color: white;
+}
+
+.readonly-input {
+    background-color: #f0f0f0; 
+    color: #6c757d; 
+    cursor: not-allowed;
+}
+td.keterangan-poli, td.nama-pasien {
+    word-wrap: break-word;
+    max-width: 260px;
+    white-space: normal;
+    text-align: left; 
+}
+
+td.alamat-pasien{
+    word-wrap: break-word;
+    max-width: 250px;
+    white-space: normal;
+    text-align: left;
+}
+
+.toggle-status {
+    display: flex;
+    align-items: center;
+}
+.form-switch .form-check-input {
+    width: 3em;
+    height: 1.5em;
+    margin-left: 0;
+}
+.form-switch .form-check-input:checked {
+    background-color: #42c3cf;
+    border-color: #42c3cf;
+}
+.content::after {
+    content: "© Destio Wahyu. All Rights Reserved.";
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin-top: 20px;
+    padding: 10px 0;
+    border-top: 1px solid #eee;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 768px) {
+    .sidebar {
+        left: -250px;
+    }
+    .sidebar.open {
+        left: 0;
+    }
+    .content {
+        padding: 80px 40px;
+        margin-left: 0;
+    }
+    th, td {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .btn-edit, .btn-hapus {
+        padding: 3px 6px;
+        font-size: 10px;
+    }
+    table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            th {
+                display: none; 
+            }
+            td {
+                text-align: left;
+                padding: 8px;
+                border: none;
+                border-bottom: 1px solid #ddd;
+            }
+            tr {
+                margin-bottom: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+            }
+            td::before {
+                font-weight: bold;
+                display: inline-block;
+                width: 100px;
+                color: #42c3cf;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                white-space: nowrap;
+            }
+            td.keterangan-poli {
+                max-width: 100%;
+            }
+
+            /* TABEL HALAMAN ADMIN - AWAL */
+            /* Styling untuk Tabel Pasien */
+            .table-pasien td:nth-of-type(1)::before { content: "No : "; }
+            .table-pasien td:nth-of-type(2)::before { content: "ID : "; }
+            .table-pasien td:nth-of-type(3)::before { content: "Nama : "; }
+            .table-pasien td:nth-of-type(4)::before { content: "Alamat : "; }
+            .table-pasien td:nth-of-type(5)::before { content: "No KTP : "; }
+            .table-pasien td:nth-of-type(6)::before { content: "No HP : "; }
+            .table-pasien td:nth-of-type(7)::before { content: "No RM : "; }
+            .table-pasien td:nth-of-type(8)::before { content: "Username : "; }
+            .table-pasien td:nth-of-type(9)::before { content: "Aksi : "; }
+
+            /* Styling untuk Tabel Dokter */
+            .table-dokter td:nth-of-type(1)::before { content: "No : "; }
+            .table-dokter td:nth-of-type(2)::before { content: "ID Dokter : "; }
+            .table-dokter td:nth-of-type(3)::before { content: "Nama : "; }
+            .table-dokter td:nth-of-type(4)::before { content: "Alamat : "; }
+            .table-dokter td:nth-of-type(5)::before { content: "No HP : "; }
+            .table-dokter td:nth-of-type(6)::before { content: "Poli : "; }
+            .table-dokter td:nth-of-type(7)::before { content: "Username : "; }
+            .table-dokter td:nth-of-type(8)::before { content: "Aksi : "; }
+
+            /* Styling untuk Tabel Poli */
+            .table-poli td:nth-of-type(1)::before { content: "No : "; }
+            .table-poli td:nth-of-type(2)::before { content: "ID Poli : "; }
+            .table-poli td:nth-of-type(3)::before { content: "Nama Poli : "; }
+            .table-poli td:nth-of-type(4)::before { content: "Keterangan : "; }
+            .table-poli td:nth-of-type(5)::before { content: "Aksi : "; }
+
+            /* Styling untuk Tabel Obat */
+            .table-obat td:nth-of-type(1)::before { content: "No : "; }
+            .table-obat td:nth-of-type(2)::before { content: "ID Obat : "; }
+            .table-obat td:nth-of-type(3)::before { content: "Nama Obat : "; }
+            .table-obat td:nth-of-type(4)::before { content: "Kemasan : "; }
+            .table-obat td:nth-of-type(5)::before { content: "Harga : "; }
+            .table-obat td:nth-of-type(6)::before { content: "Aksi : "; }
+            /* TABEL HALAMAN ADMIN - AKHIR */
+
+
+
+            /* TABEL HALAMAN DOKTER - AWAL */
+            /* Styling untuk Tabel Jadwal Periksa */
+            .table-jadwalperiksa td:nth-of-type(1)::before { content: "No : "; }
+            .table-jadwalperiksa td:nth-of-type(2)::before { content: "Nama Dokter : "; }
+            .table-jadwalperiksa td:nth-of-type(3)::before { content: "Poli : "; }
+            .table-jadwalperiksa td:nth-of-type(4)::before { content: "Hari : "; }
+            .table-jadwalperiksa td:nth-of-type(5)::before { content: "Jam Mulai : "; }
+            .table-jadwalperiksa td:nth-of-type(6)::before { content: "Jam Selesai : "; }
+            .table-jadwalperiksa td:nth-of-type(7)::before { content: "Status : "; }
+
+            /* Styling untuk Tabel Periksa Pasien */
+            .table-periksapasien td:nth-of-type(1)::before { content: "No : "; }
+            .table-periksapasien td:nth-of-type(2)::before { content: "Nama Pasien : "; }
+            .table-periksapasien td:nth-of-type(3)::before { content: "No Antrian : "; }
+            .table-periksapasien td:nth-of-type(4)::before { content: "Keluhan : "; }
+            .table-periksapasien td:nth-of-type(5)::before { content: "Tgl Pendaftaran : "; }
+            .table-periksapasien td:nth-of-type(6)::before { content: "Status : "; }
+            .table-periksapasien td:nth-of-type(7)::before { content: "Aksi : "; }
+
+            /* Styling untuk Tabel Periksa Pasien */
+            .table-riwayatpasien td:nth-of-type(1)::before { content: "No : "; }
+            .table-riwayatpasien td:nth-of-type(2)::before { content: "Nama Pasien : "; }
+            .table-riwayatpasien td:nth-of-type(3)::before { content: "No RM : "; }
+            .table-riwayatpasien td:nth-of-type(4)::before { content: "Tgl Pendaftaran : "; }
+            .table-riwayatpasien td:nth-of-type(5)::before { content: "Poli : "; }
+            .table-riwayatpasien td:nth-of-type(6)::before { content: "Dokter : "; }
+            .table-riwayatpasien td:nth-of-type(7)::before { content: "Aksi : "; }
+            /* TABEL HALAMAN DOKTER - AKHIR */
+
+
+
+            /* TABEL HALAMAN PASIEN - AWAL */
+            /* Styling untuk Tabel Riwayat Daftar Poli */
+            .table-riwayatdaftarpoli td:nth-of-type(1)::before { content: "No : "; }
+            .table-riwayatdaftarpoli td:nth-of-type(2)::before { content: "Poli : "; }
+            .table-riwayatdaftarpoli td:nth-of-type(3)::before { content: "Dokter : "; }
+            .table-riwayatdaftarpoli td:nth-of-type(4)::before { content: "Jadwal : "; }
+            .table-riwayatdaftarpoli td:nth-of-type(5)::before { content: "No Antrian : "; }
+            .table-riwayatdaftarpoli td:nth-of-type(6)::before { content: "Waktu Daftar : "; }
+            .table-riwayatdaftarpoli td:nth-of-type(7)::before { content: "Status : "; }
+            .table-riwayatdaftarpoli td:nth-of-type(8)::before { content: "Aksi : "; }
+        }
+}

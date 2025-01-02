@@ -1,0 +1,63 @@
+body {
+    background-color: #f7f9fc;
+}
+
+.bg-yellow {
+    background-color: #fad24d;
+}
+
+.text-green {
+    color: #42c3cf;
+}
+
+.btn-green {
+    background-color: #42c3cf;
+    color: #ffffff;
+}
+
+.btn-grey {
+    background-color: #697475;
+    color: #ffffff;
+}
+
+.btn-green:hover {
+    background-color: #42c3cf;
+}
+
+.btn-grey:hover {
+    background-color: #4d4d4d;
+}
+.logindokter{
+    display: block;
+    color:#fad24d;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+.logindokter:hover{
+    transform: scale(1.15);
+}
+
+.registerpasien{
+    display: block;
+    color: #42c3cf;
+    transition: transform 0.3s ease-in-out;
+}
+
+.registerpasien:hover{
+    transform: scale(1.15);
+}
+
+.row {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.16);
+    border: none;
+    background-color: #ffffff;
+    border-radius: 25px;
+    padding: 25px;
+}
+
+.container{
+    justify-content: center;
+    align-items: center;
+}
