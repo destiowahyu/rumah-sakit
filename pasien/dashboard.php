@@ -44,16 +44,19 @@ $riwayatTerakhir = $conn->query("
         <i class="fas fa-bars"></i>
     </button>
     <div class="sidebar" id="sidebar">
-        <div class="avatar-container">
-            <h4 id="admin-panel">Pasien Panel</h4>
-            <img src="../assets/images/pasien.png" class="admin-avatar" alt="Admin">
-            <h6 id="admin-name"><?= htmlspecialchars($pasienName) ?></h6>
-        </div>
+    <div class="avatar-container">
+        <h4 id="admin-panel">Pasien Panel</h4>
+        <img src="../assets/images/pasien.png" class="admin-avatar" alt="Admin">
+        <h6 id="admin-name"><?= htmlspecialchars($pasienName) ?></h6>
+    </div>
         <a href="dashboard.php" class="<?php echo ($current_page == 'dashboard.php') ? 'active' : ''; ?>">
             <i class="fas fa-chart-pie"></i> <span>Dashboard</span>
         </a>
         <a href="daftar_poli.php" class="<?php echo ($current_page == 'daftar_poli.php') ? 'active' : ''; ?>">
             <i class="fas fa-hospital"></i> <span>Daftar Poli</span>
+        </a>
+        <a href="profil.php" class="<?php echo ($current_page == 'profil.php') ? 'active' : ''; ?>">
+            <i class="fas fa-user"></i> <span>Profil</span>
         </a>
         <a href="../logout.php" class="<?php echo ($current_page == 'logout.php') ? 'active' : ''; ?>">
             <i class="fas fa-sign-out-alt"></i> <span>Logout</span>

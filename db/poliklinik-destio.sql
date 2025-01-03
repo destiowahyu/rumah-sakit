@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 02 Jan 2025 pada 12.29
+-- Waktu pembuatan: 02 Jan 2025 pada 17.24
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -61,7 +61,6 @@ CREATE TABLE `daftar_poli` (
 --
 
 INSERT INTO `daftar_poli` (`id`, `id_pasien`, `id_jadwal`, `keluhan`, `no_antrian`, `status`, `created_at`) VALUES
-(46, 13, 10, 'tolong kaki saya sakit banget', 3, 'Belum Diperiksa', '2024-12-30 13:43:25'),
 (47, 13, 2, 'gigi saya sakit', 1, 'Sudah Diperiksa', '2024-12-30 15:33:40'),
 (49, 13, 13, 'anak saya sakit', 1, 'Belum Diperiksa', '2024-12-31 02:14:05'),
 (51, 13, 13, 'anak sakit', 1, 'Belum Diperiksa', '2024-12-31 02:29:20'),
@@ -88,7 +87,9 @@ INSERT INTO `daftar_poli` (`id`, `id_pasien`, `id_jadwal`, `keluhan`, `no_antria
 (74, 13, 10, 'dada saya sakit', 4, 'Belum Diperiksa', '2025-01-01 15:02:46'),
 (75, 13, 2, 'gigi saya sakit dok', 1, 'Sudah Diperiksa', '2025-01-01 15:05:18'),
 (76, 14, 13, 'anak saya jatuh', 1, 'Sudah Diperiksa', '2025-01-01 22:30:30'),
-(77, 14, 2, 'gigi saya nyut nyutan', 1, 'Sudah Diperiksa', '2025-01-02 09:17:47');
+(77, 14, 2, 'gigi saya nyut nyutan', 1, 'Sudah Diperiksa', '2025-01-02 09:17:47'),
+(78, 13, 13, 'anak saya sakit dok', 1, 'Sudah Diperiksa', '2025-01-02 21:23:16'),
+(79, 14, 2, 'pak gigi saya sakit', 2, 'Sudah Diperiksa', '2025-01-02 21:28:05');
 
 -- --------------------------------------------------------
 
@@ -121,7 +122,12 @@ INSERT INTO `detail_periksa` (`id`, `id_periksa`, `id_obat`, `jumlah`) VALUES
 (46, 14, 1, 1),
 (47, 19, 2, 2),
 (48, 19, 1, 1),
-(49, 19, 5, 3);
+(49, 19, 5, 3),
+(50, 21, 1, 1),
+(51, 21, 2, 2),
+(52, 21, 5, 1),
+(56, 22, 1, 1),
+(57, 22, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -145,7 +151,7 @@ CREATE TABLE `dokter` (
 
 INSERT INTO `dokter` (`id`, `nama`, `alamat`, `no_hp`, `id_poli`, `username`, `password`) VALUES
 (15, 'Dokter Default', 'Jalan Sehat No. 10', '081234567890', 1, 'dokter', 'd22af4180eee4bd95072eb90f94930e5'),
-(16, 'Dokter Tirta', 'Jalan Bahagia No. 21', '085955786124', 2, 'doktertirta', 'f9d50dadc65aaf13bdaad159b81bed39'),
+(16, 'Dokter Tirta', 'Jalan Bahagia No. 22', '085955786124', 2, 'doktertirta', 'f9d50dadc65aaf13bdaad159b81bed39'),
 (17, 'Dokter Richard', 'Jalan Menuju Roma No. 12', '085255123444', 4, 'dokterrichard', '44d9284a867b8f8542d1338eb6d6329d'),
 (18, 'Dokter Ela', 'Jalan Kedamaian No. 20', '081325157848', 2, 'dokterela', 'e739988d67ab45e398756182c436c183'),
 (21, 'Dokter Tio', 'Jalan Menuju Surga No. 1', '088455655211', 3, 'doktertio', '547caa81a5ba5ce95744015488950175'),
@@ -187,7 +193,8 @@ INSERT INTO `jadwal_periksa` (`id`, `id_dokter`, `hari`, `jam_mulai`, `jam_seles
 (14, 17, 'Senin', '11:00:00', '14:30:00', 'Tidak Aktif'),
 (15, 17, 'Selasa', '08:00:00', '13:00:00', 'Aktif'),
 (16, 23, 'Jumat', '07:00:00', '11:30:00', 'Aktif'),
-(17, 23, 'Kamis', '11:30:00', '15:00:00', 'Tidak Aktif');
+(17, 23, 'Kamis', '11:30:00', '15:00:00', 'Tidak Aktif'),
+(18, 16, 'Jumat', '08:00:00', '11:30:00', 'Tidak Aktif');
 
 -- --------------------------------------------------------
 
@@ -325,7 +332,6 @@ CREATE TABLE `periksa` (
 --
 
 INSERT INTO `periksa` (`id`, `id_daftar_poli`, `tgl_periksa`, `catatan`, `biaya_periksa`) VALUES
-(1, 69, '2024-12-31 00:00:00', 'istirahat ya mas', 155000),
 (2, 69, '2024-12-31 00:00:00', 'istirahat mas\r\n', 167000),
 (3, 69, '2024-12-31 00:00:00', 'koskok', 160000),
 (4, 68, '2024-12-31 00:00:00', 'makan mas', 150000),
@@ -333,16 +339,14 @@ INSERT INTO `periksa` (`id`, `id_daftar_poli`, `tgl_periksa`, `catatan`, `biaya_
 (6, 56, '2024-12-31 00:00:00', 'buat jalan jalan pak', 150000),
 (7, 70, '2024-12-31 00:00:00', 'tolong anaknya jangan kebanyakan main', 150000),
 (8, 71, '2025-01-01 00:00:00', 'jangan banyak minum es', 150000),
-(9, 72, '2025-01-01 19:04:00', 'jangan minum es', 150000),
-(10, 72, '2025-01-01 19:04:00', 'jangan minum es', 150000),
-(12, 72, '2025-01-01 19:04:00', 'jangan minum es', 150000),
 (14, 75, '2025-01-01 15:05:00', 'jangan makan es', 155000),
-(15, 75, '2025-01-01 15:05:00', 'jangan makan es', 155000),
 (16, 76, '2025-01-01 22:39:00', 'hati hati pak', 200000),
 (17, 76, '2025-01-01 22:42:00', 'hati hati pak', 180000),
 (18, 76, '2025-01-01 22:50:00', 'hati hati', 185000),
 (19, 77, '2025-01-02 09:20:00', 'jangan makan batu bata pak', 194000),
-(20, 47, '2025-01-02 13:01:00', 'sikat gigi', 200000);
+(20, 47, '2025-01-02 13:01:00', 'sikat gigi', 200000),
+(21, 78, '2025-01-02 21:24:00', 'Jangan kebanyakan main gadget', 188000),
+(22, 79, '2025-01-02 21:28:00', 'makanya jangan suka makan es batu pak', 185000);
 
 -- --------------------------------------------------------
 
@@ -446,13 +450,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT untuk tabel `daftar_poli`
 --
 ALTER TABLE `daftar_poli`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT untuk tabel `detail_periksa`
 --
 ALTER TABLE `detail_periksa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT untuk tabel `dokter`
@@ -464,7 +468,7 @@ ALTER TABLE `dokter`
 -- AUTO_INCREMENT untuk tabel `jadwal_periksa`
 --
 ALTER TABLE `jadwal_periksa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `obat`
@@ -482,7 +486,7 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT untuk tabel `periksa`
 --
 ALTER TABLE `periksa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `poli`
