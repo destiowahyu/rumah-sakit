@@ -11,12 +11,13 @@ include '../includes/db.php';
 $id_daftar = isset($_GET['id']) ? intval($_GET['id']) : null;
 
 if (!$id_daftar) {
-    echo "ID daftar tidak valid.";
+    echo "ID daftar tidak valid. ";
+    echo "Silahkan kembali ke halaman sebelumnya.";
     exit();
 }
 
 // Check if the patient has already been examined
-$query_check = "SELECT dp.*, p.id AS id_periksa, p.tgl_periksa, p.catatan, p.biaya_periksa,
+$query_check = "SELECT dp.*, p.id AS id_periksa, p.tgl_periksa, p.catatan, p.biaya_periksa, pas.no_hp,
                        pas.nama AS nama_pasien, pas.no_rm
                 FROM daftar_poli dp 
                 LEFT JOIN periksa p ON dp.id = p.id_daftar_poli 
@@ -176,7 +177,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <div class="container">
             <h1 class="mb-4"><?= $is_edit_mode ? 'Edit' : 'Periksa' ?> Pasien</h1>
             <div class="welcome">
-                Pasien <span><strong style="color: #42c3cf;"><?= htmlspecialchars($data['nama_pasien']) ?></strong></span>
+                Data Diri : <span><strong style="color: #42c3cf;"><?= htmlspecialchars($data['nama_pasien']) ?></strong></span>
             </div>
 
             <!-- Informasi Pasien -->
@@ -201,6 +202,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <th>Nomor Antrian</th>
                     <td><?= htmlspecialchars($data['no_antrian'] ?? '-') ?></td>
                 </tr>
+                <tr>
+                    <th>No HP</th>
+                    <td><?= htmlspecialchars($data['no_hp'] ?? '-') ?></td>
+                </tr>
             </table>
 
             <!-- Form Pemeriksaan -->
@@ -222,9 +227,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
                 <!-- Daftar Obat -->
                 <div class="mb-3">
-                    <label class="form-label">Obat yang Diberikan</label>
+                    <label class="form-label"><strong>Tambahkan Obat :</strong></label>
                     <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#modalObat">Pilih Obat</button>
                     <div id="section-obat" style="display: none;">
+                    <h4 class="form-label mt-3">Obat yang Diberikan : </h4>
                         <table class="table table-bordered" id="table-obat-selected">
                             <thead>
                                 <tr>
@@ -252,7 +258,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                     <input type="hidden" name="total_biaya" id="input-total-biaya" value="150000">
                 </div>
 
-                <button type="submit" class="btn btn-success">Simpan</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
                 <a href="periksa_pasien.php" class="btn btn-secondary">Kembali</a>
             </form>
         </div>
@@ -292,7 +298,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
                                     <input type="number" class="form-control jumlah-obat" value="1" min="1">
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-success btn-add-obat">
+                                    <button type="button" class="btn btn-primary btn-add-obat">
                                         Tambah
                                     </button>
                                 </td>

@@ -116,7 +116,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         .password-toggle {
             position: absolute;
             right: 12px;
-            top: 74%;
+            top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
             z-index: 10;
