@@ -68,6 +68,30 @@ if (!$obatList) {
 }
 
 $adminName = $_SESSION['username'];
+
+    // If it's an AJAX request, only return the table rows
+    if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+        $no = 1;
+        ob_start(); // Start output buffering
+        while ($row = $obatList->fetch_assoc()): ?>
+            <tr>
+                <td><?= $no++ ?></td>
+                <td><?= $row['id'] ?></td>
+                <td><?= $row['nama_obat'] ?></td>
+                <td><?= $row['kemasan'] ?></td>
+                <td><?= $row['harga'] ?></td>
+                <td>
+                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editObatModal<?= $row['id'] ?>">Edit</button>
+                        <form method="POST" style="display:inline-block;">
+                            <input type="hidden" name="id" value="<?= $row['id'] ?>">
+                            <button type="submit" name="delete" class="btn btn-danger btn-sm">Hapus</button>
+                        </form>
+                </td>
+            </tr>
+        <?php endwhile;
+        echo ob_get_clean(); // Return only the buffered content
+        exit;
+    }
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +99,7 @@ $adminName = $_SESSION['username'];
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Admin</title>
+    <title>Kelola Obat - Admin</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/admin/styles.css">
@@ -112,6 +136,9 @@ $adminName = $_SESSION['username'];
         <a href="kelola_obat.php" class="<?php echo ($current_page == 'kelola_obat.php') ? 'active' : ''; ?>">
             <i class="fas fa-pills"></i> <span>Kelola Obat</span>
         </a>
+        <a href="kelola_admin.php" class="<?php echo ($current_page == 'kelola_admin.php') ? 'active' : ''; ?>">
+            <i class="fas fa-user-shield"></i> <span>Kelola Admin</span>
+        </a>
         <a href="../logout.php" class="<?php echo ($current_page == 'logout.php') ? 'active' : ''; ?>">
             <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
         </a>
@@ -126,10 +153,9 @@ $adminName = $_SESSION['username'];
                     <h1 class="mb-4">Kelola Obat</h1>
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <form method="GET" class="d-flex">
-                            <input type="text" name="search" class="form-control me-2" placeholder="Cari Obat..." value="<?= htmlspecialchars($search) ?>">
-                            <button type="submit" class="btn btn-primary">Cari</button>
-                        </form>
+                        <div class="d-flex">
+                            <input type="text" id="searchInput" class="form-control me-2" placeholder="Cari Obat..." value="<?= htmlspecialchars($search) ?>">
+                        </div>
                     </div>
 
 
@@ -250,7 +276,35 @@ $adminName = $_SESSION['username'];
                    
 
 
+        
+            <script>
+                // Real-time search
+                    document.addEventListener('DOMContentLoaded', function() {
+                const searchInput = document.getElementById('searchInput');
+                const tableBody = document.querySelector('.table-obat tbody');
 
+                let timeoutId;
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(timeoutId);
+                    timeoutId = setTimeout(() => {
+                        const searchTerm = this.value.toLowerCase();
+                        
+                        // Add X-Requested-With header to identify AJAX request
+                        fetch(`kelola_obat.php?search=${encodeURIComponent(searchTerm)}`, {
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest'
+                            }
+                        })
+                        .then(response => response.text())
+                        .then(html => {
+                            // Only update the table rows
+                            tableBody.innerHTML = html;
+                        })
+                        .catch(error => console.error('Error:', error));
+                    }, 300); // Add debounce delay of 300ms
+                });
+            });
+            </script>
 
         <!-- SweetAlert Notification -->
         <?php if ($message): ?>

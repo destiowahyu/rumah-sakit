@@ -197,6 +197,9 @@ if (isset($_GET['ajax_search'])) {
         <a href="kelola_obat.php" class="<?php echo ($current_page == 'kelola_obat.php') ? 'active' : ''; ?>">
             <i class="fas fa-pills"></i> <span>Kelola Obat</span>
         </a>
+        <a href="kelola_admin.php" class="<?php echo ($current_page == 'kelola_admin.php') ? 'active' : ''; ?>">
+            <i class="fas fa-user-shield"></i> <span>Kelola Admin</span>
+        </a>
         <a href="../logout.php" class="<?php echo ($current_page == 'logout.php') ? 'active' : ''; ?>">
             <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
         </a>

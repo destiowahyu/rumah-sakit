@@ -458,6 +458,12 @@ td.alamat-pasien{
             .table-obat td:nth-of-type(4)::before { content: "Kemasan : "; }
             .table-obat td:nth-of-type(5)::before { content: "Harga : "; }
             .table-obat td:nth-of-type(6)::before { content: "Aksi : "; }
+
+            /* Styling untuk Tabel Admin */
+            .table-kelola-admin td:nth-of-type(1)::before { content: "No : "; }
+            .table-kelola-admin td:nth-of-type(2)::before { content: "ID Admin : "; }
+            .table-kelola-admin td:nth-of-type(3)::before { content: "Username : "; }
+            .table-kelola-admin td:nth-of-type(4)::before { content: "Aksi : "; }
             /* TABEL HALAMAN ADMIN - AKHIR */
 
 

@@ -23,7 +23,18 @@ $riwayatTerakhir = $conn->query("
     ORDER BY dp.created_at DESC
     LIMIT 1
 ")->fetch_assoc();
+
+$waktuPeriksa = $conn->query("
+    SELECT p.tgl_periksa
+    FROM periksa p
+    JOIN daftar_poli dp ON p.id_daftar_poli = dp.id
+    WHERE dp.id_pasien = '{$pasienData['id']}'
+    ORDER BY p.tgl_periksa DESC
+    LIMIT 1
+")->fetch_assoc();
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -92,6 +103,7 @@ $riwayatTerakhir = $conn->query("
                         <p><strong>Poli</strong> : <?= htmlspecialchars($riwayatTerakhir['nama_poli']) ?></p>
                         <p><strong>Keluhan</strong> : <?= htmlspecialchars($riwayatTerakhir['keluhan']) ?></p>
                         <p><strong>Status</strong> : <?= htmlspecialchars($riwayatTerakhir['status']) ?></p>
+                        <p><strong>Waktu Diperiksa</strong> : <?= htmlspecialchars($waktuPeriksa['tgl_periksa']) ?></p>
                     <?php else: ?>
                         <p>Belum ada riwayat pendaftaran.</p>
                     <?php endif; ?>

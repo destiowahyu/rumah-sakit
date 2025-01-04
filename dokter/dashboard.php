@@ -111,14 +111,14 @@ $pasienBelumDiperiksa = $conn->query("
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <i class="fas fa-user-clock"></i>
+                        <i class="fas fa-user-plus"></i>
                         <h5>Pasien Hari Ini</h5>
                         <p><?= $pasienHariIni ?></p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="card">
-                        <i class="fas fa-user-plus"></i>
+                        <i class="fas fa-user-clock"></i>
                         <h5>Pasien Belum Diperiksa</h5>
                         <p><?= $pasienBelumDiperiksa ?></p>
                     </div>
