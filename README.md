@@ -1,5 +1,5 @@
 # DATABASE
-Buat database dengan nama : `db_rumah_sakit`
+Buat database dengan nama : `poliklinik-destio`
 
 lalu import file database yang ada di folder db
 
