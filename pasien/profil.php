@@ -127,7 +127,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <!-- Main Content -->
     <div class="content" id="content">
         <div class="container">
-            <h1 class="mb-4">Profil Dokter</h1>
+            <h1 class="mb-4">Profil Pasien</h1>
                     <div class="card-profildokter">
                         <div class="card-body">
                     <?php

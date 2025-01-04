@@ -219,7 +219,7 @@ if (isset($_GET['ajax_search'])) {
                 <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addDoctorModal"><i class="fas fa-user-md"></i> Tambah Dokter</button>
 
                 <!-- ISI TABEL DOKTER -->
-                <table class="table-dokter table-bordered">
+                <table class="table-dokter table-striped">
                     <thead>
                         <tr>
                             <th>No</th>

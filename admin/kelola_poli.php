@@ -163,7 +163,7 @@
 
                     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addPoliModal"><i class="bi bi-building-add"></i> Tambah Poli</button>
 
-                    <table class="table-poli table-bordered">
+                    <table class="table-poli table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>

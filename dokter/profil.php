@@ -67,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo json_encode(['status' => 'error', 'message' => 'Password baru dan konfirmasi tidak cocok']);
             exit;
         }
-        $hashed_password = md5($new_password); // Updated password hashing
+        $hashed_password = md5($new_password);
         $update_fields[] = "password = ?";
         $param_types .= "s";
         $param_values[] = $hashed_password;
@@ -103,11 +103,41 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil Dokter</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="../assets/css/admin/styles.css">
     <link rel="icon" type="image/png" href="../assets/images/avatar-doctor.png">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        .password-container {
+            position: relative;
+        }
+        .password-toggle {
+            position: absolute;
+            right: 12px;
+            top: 74%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            z-index: 10;
+        }
+        .profile-info {
+            margin-bottom: 1.5rem;
+        }
+        .profile-info label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .profile-info p {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .edit-button {
+            margin-bottom: 2rem;
+        }
+    </style>
 </head>
 <body>
     <!-- Overlay -->
@@ -147,54 +177,92 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <div class="content" id="content">
         <div class="container">
             <h1 class="mb-4">Profil Dokter</h1>
-                    <div class="card-profildokter">
-                        <div class="card-body">
-                            <form id="profileForm" method="POST">
-                                <div class="mb-3">
-                                    <label for="nama" class="form-label"><span><strong style="color: #42c3cf;">Nama Lengkap</strong></span></label>
-                                    <input type="text" class="form-control" id="nama" name="nama" value="<?= htmlspecialchars($dokter['nama']) ?>" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="alamat" class="form-label"><span><strong style="color: #42c3cf;">Alamat</strong></span></label>
-                                    <textarea class="form-control" id="alamat" name="alamat" rows="3" required><?= htmlspecialchars($dokter['alamat']) ?></textarea>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="no_hp" class="form-label"><span><strong style="color: #42c3cf;">No. HP</strong></span></label>
-                                    <input type="tel" class="form-control" id="no_hp" name="no_hp" value="<?= htmlspecialchars($dokter['no_hp']) ?>" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="username" class="form-label"><span><strong style="color: #42c3cf;">Username</strong></span></label>
-                                    <input type="text" class="form-control" id="username" name="username" value="<?= htmlspecialchars($dokter['username']) ?>" required>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="new_password" class="form-label"><span><strong style="color: #42c3cf;">Password Baru (Kosongkan jika tidak ingin mengubah)</strong></span></label>
-                                    <input type="password" class="form-control" id="new_password" name="new_password">
-                                    <!--<div class="form-text">Minimal 6 karakter</div>--> </div>
-
-                                <div class="mb-3">
-                                    <label for="confirm_password" class="form-label"><span><strong style="color: #42c3cf;">Konfirmasi Password Baru</strong></span></label>
-                                    <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                            </form>
+            <div class="card-profildokter">
+                <div class="card-body">
+                    <!-- View Profile -->
+                    <div class="profile-info">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Nama Lengkap</label>
+                                <p><?= htmlspecialchars($dokter['nama']) ?></p>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Username</label>
+                                <p><?= htmlspecialchars($dokter['username']) ?></p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Alamat</label>
+                                <p><?= htmlspecialchars($dokter['alamat']) ?></p>
+                            </div>
+                            <div class="col-md-6">
+                                <label>No. HP</label>
+                                <p><?= htmlspecialchars($dokter['no_hp']) ?></p>
+                            </div>
                         </div>
                     </div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProfileModal">
+                        Edit Profil
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Toast Notification -->
-    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-        <div id="notificationToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <strong class="me-auto">Notifikasi</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    <!-- Edit Profile Modal -->
+    <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">Edit Profil</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="profileForm" method="POST">
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="nama" name="nama" value="<?= htmlspecialchars($dokter['nama']) ?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="alamat" class="form-label">Alamat</label>
+                            <textarea class="form-control" id="alamat" name="alamat" rows="3" required><?= htmlspecialchars($dokter['alamat']) ?></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="no_hp" class="form-label">No. HP</label>
+                            <input type="tel" class="form-control" id="no_hp" name="no_hp" value="<?= htmlspecialchars($dokter['no_hp']) ?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" name="username" value="<?= htmlspecialchars($dokter['username']) ?>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="new_password" class="form-label">Password Baru (Kosongkan jika tidak ingin mengubah)</label>
+                            <div class="password-container">
+                                <input type="password" class="form-control" id="new_password" name="new_password">
+                                <i class="fas fa-eye password-toggle" onclick="togglePasswordVisibility('new_password')"></i>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Konfirmasi Password Baru</label>
+                            <div class="password-container">
+                                <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                                <i class="fas fa-eye password-toggle" onclick="togglePasswordVisibility('confirm_password')"></i>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="toast-body" id="notificationMessage"></div>
         </div>
     </div>
 
@@ -213,6 +281,21 @@ $current_page = basename($_SERVER['PHP_SELF']);
         }
     }
 
+    function togglePasswordVisibility(fieldId) {
+        const passwordField = document.getElementById(fieldId);
+        const icon = passwordField.nextElementSibling;
+        
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        } else {
+            passwordField.type = "password";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        }
+    }
+
     $(document).ready(function() {
         // Form submission handling
         $('#profileForm').on('submit', function(e) {
@@ -221,11 +304,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
             // Basic validation
             const newPassword = $('#new_password').val();
             const confirmPassword = $('#confirm_password').val();
-
-            //if (newPassword && newPassword.length < 6) {
-            //    showNotification('Password baru harus minimal 6 karakter', 'danger');
-            //    return;
-            //}
 
             if (newPassword !== confirmPassword) {
                 showNotification('Password baru dan konfirmasi tidak cocok', 'danger');
@@ -241,38 +319,36 @@ $current_page = basename($_SERVER['PHP_SELF']);
                 success: function(response) {
                     if (response.status === 'success') {
                         showNotification(response.message, 'success');
-                        // Update displayed username if it was changed
                         if ($('#username').val() !== '<?= $username ?>') {
                             $('#admin-name').text($('#username').val());
                         }
-                        // Clear password fields
                         $('#new_password, #confirm_password').val('');
+                        updateProfileDisplay();
+                        $('#editProfileModal').modal('hide');
                     } else {
-                        showNotification(response.message, 'danger');
+                        showNotification(response.message, 'error');
                     }
                 },
                 error: function() {
-                    showNotification('Terjadi kesalahan. Silakan coba lagi.', 'danger');
+                    showNotification('Terjadi kesalahan. Silakan coba lagi.', 'error');
                 }
             });
         });
 
         function showNotification(message, type = 'success') {
-            const toast = $('#notificationToast');
-            const toastBody = $('#notificationMessage');
-            
-            // Set toast header color based on type
-            const header = toast.find('.toast-header');
-            header.removeClass('bg-success bg-danger text-white');
-            if (type === 'success') {
-                header.addClass('bg-success text-white');
-            } else {
-                header.addClass('bg-danger text-white');
-            }
-            
-            toastBody.text(message);
-            const bsToast = new bootstrap.Toast(toast);
-            bsToast.show();
+            Swal.fire({
+                icon: type,
+                title: message,
+                showConfirmButton: false,
+                timer: 1500
+            });
+        }
+
+        function updateProfileDisplay() {
+            $('.profile-info p').eq(0).text($('#nama').val());
+            $('.profile-info p').eq(1).text($('#username').val());
+            $('.profile-info p').eq(2).text($('#alamat').val());
+            $('.profile-info p').eq(3).text($('#no_hp').val());
         }
     });
     </script>

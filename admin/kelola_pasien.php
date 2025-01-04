@@ -277,7 +277,7 @@ if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
             <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addPatientModal"><i class="bi bi-person-fill-add"></i> Tambah Pasien</button>
 
             <!-- Tabel Pasien -->
-            <table class="table-pasien table-bordered">
+            <table class="table-pasien table-striped">
                 <thead>
                     <tr>
                         <th>No</th>

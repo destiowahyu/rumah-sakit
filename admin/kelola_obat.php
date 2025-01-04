@@ -165,7 +165,7 @@ $adminName = $_SESSION['username'];
 
 
                     <!-- ISI TABEL -->
-                    <table class="table-obat table-bordered">
+                    <table class="table-obat table-striped">
                         <thead>
                             <tr>
                                 <th>No</th>

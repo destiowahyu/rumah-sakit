@@ -261,7 +261,7 @@ if (isset($_GET['ajax_search'])) {
                 <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addAdminModal"><i class="fas fa-user-plus"></i> Tambah Admin</button>
 
                 <!-- ISI TABEL ADMIN -->
-                <table class="table-kelola-admin table-bordered">
+                <table class="table-kelola-admin table-striped">
                     <thead>
                         <tr>
                             <th>No</th>
